@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>*čas nové kapitoly…</title>
+  <meta name="description" content="Odpočet do nové kapitoly — 29. 6. 2026" />
+
+  <style>
+    /* ---- Helvetica 93 Extended Black ---- */
+    @font-face {
+      font-family: "Helvetica93ExtendedBlack";
+      src: url("fonts/Helvetica93-ExtendedBlack.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      /* Background pulled from the reference images */
+      --bg: #29c5f6;
+      --white: #ffffff;
+      --black: #000000;
+
+      /* The big timer scales with the viewport so it always matches the
+         reference proportions; on a ~2000px screen the letter-spacing
+         lands at the requested -100px. */
+      --timer-size: clamp(2.75rem, 11.5vw, 15rem);
+      --timer-spacing: clamp(-100px, -5vw, -1rem);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      font-family: "Helvetica93ExtendedBlack", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Heading + timer live in the vertical centre */
+    .stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.5rem, 6vh, 5rem);
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    .heading {
+      color: var(--white);
+      font-size: clamp(2rem, 7vw, 5.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      max-width: 18ch;
+    }
+
+    .heading .star { color: var(--black); }
+
+    .timer {
+      color: var(--black);
+      font-size: var(--timer-size);
+      letter-spacing: var(--timer-spacing);
+      line-height: 1;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      /* nudge to compensate for the trailing negative letter-spacing */
+      padding-right: 0.4em;
+    }
+
+    /* ---- Social row pinned to the bottom ---- */
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.75rem, 5vw, 3.5rem);
+      padding: clamp(1.5rem, 4vh, 3rem) 1rem;
+    }
+
+    .socials a {
+      color: var(--black);
+      display: inline-flex;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .socials a:hover { opacity: 0.7; transform: translateY(-2px); }
+
+    .socials svg {
+      width: clamp(28px, 4vw, 44px);
+      height: clamp(28px, 4vw, 44px);
+      display: block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .socials a { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <h1 class="heading"><span class="star">*</span>čas nové kapitoly…</h1>
+    <div class="timer" id="timer" role="timer" aria-live="off">0:00:00:00</div>
+  </main>
+
+  <nav class="socials" aria-label="Sociální sítě">
+    <!-- Instagram (outline) -->
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+    </a>
+
+    <!-- Facebook (solid circle, white f) -->
+    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="12" fill="currentColor"></circle>
+        <path fill="var(--bg)" d="M13.5 21.9V13.9h2.7l.4-3.1h-3.1V8.8c0-.9.25-1.5 1.55-1.5H16.7V4.55C16.4 4.5 15.5 4.4 14.45 4.4c-2.2 0-3.7 1.35-3.7 3.8v2.6H8v3.1h2.75v8z"></path>
+      </svg>
+    </a>
+
+    <!-- X -->
+    <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.933zm-1.29 19.5h2.038L6.486 3.24H4.298z"></path>
+      </svg>
+    </a>
+  </nav>
+
+  <script>
+    // Target: 29. 6. 2026, 00:00 local time
+    const target = new Date(2026, 5, 29, 0, 0, 0, 0).getTime();
+    const el = document.getElementById("timer");
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function tick() {
+      const diff = target - Date.now();
+
+      if (diff <= 0) {
+        el.textContent = "0:00:00:00";
+        clearInterval(handle);
+        return;
+      }
+
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff / 3600000) % 24);
+      const minutes = Math.floor((diff / 60000) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      el.textContent = `${days}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    tick();
+    const handle = setInterval(tick, 1000);
+  </script>
+</body>
+</html>
