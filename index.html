@@ -10,7 +10,8 @@
     /* ---- Helvetica 93 Extended Black ---- */
     @font-face {
       font-family: "Helvetica93ExtendedBlack";
-      src: url("fonts/Helvetica93-ExtendedBlack.ttf") format("truetype");
+      src: url("fonts/Helvetica93-ExtendedBlack.woff2") format("woff2"),
+           url("fonts/Helvetica93-ExtendedBlack.ttf") format("truetype");
       font-weight: 900;
       font-style: normal;
       font-display: swap;
@@ -22,11 +23,11 @@
       --white: #ffffff;
       --black: #000000;
 
-      /* The big timer scales with the viewport so it always matches the
-         reference proportions; on a ~2000px screen the letter-spacing
-         lands at the requested -100px. */
-      --timer-size: clamp(2.75rem, 11.5vw, 15rem);
-      --timer-spacing: clamp(-100px, -5vw, -1rem);
+      /* Big timer scales with the viewport. Letter-spacing is em-based so it
+         stays tight-but-readable at every size (matching the reference look).
+         Bump --timer-spacing toward -0.12em for an even tighter feel. */
+      --timer-size: clamp(2.5rem, 13vw, 14rem);
+      --timer-spacing: -0.07em;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,14 +60,23 @@
 
     .heading {
       color: var(--white);
-      font-size: clamp(2rem, 7vw, 5.5rem);
+      font-size: clamp(2.25rem, 11vw, 4rem);
       line-height: 0.92;
       letter-spacing: -0.02em;
       text-transform: lowercase;
-      max-width: 18ch;
+      /* narrow screens: wrap to ~2 lines like the portrait reference */
+      max-width: 9ch;
     }
 
     .heading .star { color: var(--black); }
+
+    /* wide screens: heading on a single line like the landscape reference */
+    @media (min-width: 768px) {
+      .heading {
+        font-size: clamp(3rem, 6.5vw, 6rem);
+        max-width: none;
+      }
+    }
 
     .timer {
       color: var(--black);
@@ -75,8 +85,9 @@
       line-height: 1;
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
-      /* nudge to compensate for the trailing negative letter-spacing */
-      padding-right: 0.4em;
+      max-width: 100%;
+      /* small nudge so the trailing negative letter-spacing stays centered */
+      padding-left: 0.1em;
     }
 
     /* ---- Social row pinned to the bottom ---- */
