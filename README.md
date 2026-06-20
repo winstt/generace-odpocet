@@ -36,5 +36,9 @@ Vše je v `index.html`:
 
 - **pozadí** – CSS proměnná `--bg`
 - **cílové datum** – `new Date(2026, 5, 29, 0, 0, 0)` (měsíc je 0–11, takže `5` = červen)
-- **proklad odpočtu** – CSS proměnná `--timer-spacing` (výchozí až `-100px` na velkých obrazovkách)
+- **proklad odpočtu** – CSS proměnná `--timer-spacing` (em-based, výchozí `-0.07em`)
 - **odkazy na sítě** – `href` u jednotlivých `<a>` v sekci `.socials`
+- **nadpis** – SVG lockup („čas nové kapitoly…" s vlastním háčkem nad `č`):
+  - mobil = **inline** SVG v `index.html` (používá vložený font), `assets/heading-mobile.svg` je záloha
+  - desktop = `assets/heading-desktop.svg` (obrysové cesty, vloženo přes `<img>`)
+  - přepínají se v `@media (min-width: 768px)`

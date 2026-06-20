@@ -58,23 +58,41 @@
       text-align: center;
     }
 
+    /* Heading is the user-supplied SVG lockup (with a custom č háček, since the
+       font lacks č). Mobile is an INLINE svg so it can use the embedded
+       @font-face; desktop is the self-contained outlined svg. Both scale via
+       their viewBox. */
     .heading {
-      color: var(--white);
-      font-size: clamp(2.25rem, 11vw, 4rem);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      text-transform: lowercase;
-      /* narrow screens: wrap to ~2 lines like the portrait reference */
-      max-width: 9ch;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
-    .heading .star { color: var(--black); }
+    .heading-mobile {
+      display: block;
+      width: min(86vw, 32rem);
+      height: auto;
+    }
+    .heading-desktop { display: none; }
 
-    /* wide screens: heading on a single line like the landscape reference */
+    /* colours + metrics for the inline mobile lockup */
+    .heading-mobile .cls-1 {
+      font-family: "Helvetica93ExtendedBlack";
+      font-size: 281.11px;
+      font-weight: 900;
+    }
+    .heading-mobile .cls-2 { fill: var(--white); }
+    .heading-mobile .cls-3 { letter-spacing: -0.1em; }
+    .heading-mobile .cls-4 { letter-spacing: -0.1em; }
+    .heading-mobile .cls-5 { letter-spacing: -0.15em; }
+
+    /* wide screens: single-line outlined lockup */
     @media (min-width: 768px) {
-      .heading {
-        font-size: clamp(3rem, 6.5vw, 6rem);
-        max-width: none;
+      .heading-mobile { display: none; }
+      .heading-desktop {
+        display: block;
+        width: min(66vw, 64rem);
+        height: auto;
       }
     }
 
@@ -120,7 +138,12 @@
 </head>
 <body>
   <main class="stage">
-    <h1 class="heading"><span class="star">*</span>čas nové kapitoly…</h1>
+    <h1 class="heading" aria-label="*čas nové kapitoly…">
+      <!-- mobile: inline so it uses the embedded @font-face (č = c + polygon háček) -->
+      <svg class="heading-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1675.95 550.6" aria-hidden="true"><text class="cls-1" transform="translate(.84 240.91)"><tspan class="cls-4"><tspan x="0" y="0">*</tspan><tspan class="cls-2" x="102.32" y="0">cas nové</tspan></tspan><tspan class="cls-2"><tspan class="cls-4" x="5.77" y="248.98" xml:space="preserve"> kapitol</tspan><tspan class="cls-5" x="1222.11" y="248.98">y</tspan><tspan class="cls-3" x="1381.49" y="248.98">...</tspan></tspan></text><polygon class="cls-2" points="321.91 31.86 278.24 72.43 177.39 72.43 133.7 31.86 212.31 31.86 231.47 53.27 250.63 31.86 321.91 31.86"/></svg>
+      <!-- desktop: self-contained outlined svg -->
+      <img class="heading-desktop" src="assets/heading-desktop.svg" alt="" aria-hidden="true" />
+    </h1>
     <div class="timer" id="timer" role="timer" aria-live="off">0:00:00:00</div>
   </main>
 

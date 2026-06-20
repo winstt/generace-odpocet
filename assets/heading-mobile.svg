@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1675.95 550.6">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Helvetica93-ExtendedBlack, Helvetica93-ExtendedBlack;
+        font-size: 281.11px;
+        font-weight: 800;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        letter-spacing: -.1em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.1em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.15em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(.84 240.91)"><tspan class="cls-4"><tspan x="0" y="0">*</tspan><tspan class="cls-2" x="102.32" y="0">cas nové</tspan></tspan><tspan class="cls-2"><tspan class="cls-4" x="5.77" y="248.98" xml:space="preserve"> kapitol</tspan><tspan class="cls-5" x="1222.11" y="248.98">y</tspan><tspan class="cls-3" x="1381.49" y="248.98">...</tspan></tspan></text>
+  <polygon class="cls-2" points="321.91 31.86 278.24 72.43 177.39 72.43 133.7 31.86 212.31 31.86 231.47 53.27 250.63 31.86 321.91 31.86"/>
+</svg>
